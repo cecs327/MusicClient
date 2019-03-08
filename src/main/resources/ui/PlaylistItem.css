@@ -1,0 +1,5 @@
+.result-box {
+    -fx-border-width: 1px 4px 1px 0;
+    -fx-border-color: #000 #aaa #000 #000;
+    -fx-background-color: #333;
+}

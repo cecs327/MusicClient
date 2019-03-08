@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="createPlaylistBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="242.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="textField" layoutX="31.0" layoutY="38.0" prefHeight="25.0" prefWidth="181.0" promptText="My new playlist" style="-fx-background-color: #555555;" />
+      <Label layoutX="31.0" layoutY="14.0" text="Enter the name of the new playlist" textFill="WHITE" />
+      <Button fx:id="createButton" layoutX="31.0" layoutY="92.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #2d9115;" text="Create" textFill="#f2f2f2" />
+      <Button fx:id="cancelButton" layoutX="137.0" layoutY="92.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #252525;" text="Cancel" textFill="#f2f2f2" />
+   </children>
+</AnchorPane>

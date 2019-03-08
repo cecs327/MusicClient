@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="songPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="84.0" prefWidth="384.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="songTitleLabel" layoutX="9.0" layoutY="3.0" maxWidth="374.0" prefHeight="27.0" prefWidth="364.0" text="Song Name lksjdflsjdflasfsldjflsajf;sdfklflfdkgjdlfg" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="byLabel" layoutX="15.0" layoutY="35.0" text="By:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="artistNameLabel" layoutX="40.0" layoutY="35.0" maxWidth="333.0" text="The Red and Black Stripes ksdjfhslkdjfhksdfhdsl kdjlshfskdjf" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="albumNameLabel" layoutX="40.0" layoutY="57.0" maxWidth="335.0" text="The album name of the artistName the red and black stripes whfdslfkals;df" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="onLabel" layoutX="15.0" layoutY="57.0" text="On:" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+   <padding>
+      <Insets left="8.0" top="5.0" />
+   </padding>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

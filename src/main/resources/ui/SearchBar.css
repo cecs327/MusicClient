@@ -1,0 +1,9 @@
+.content {
+    -fx-background-color: rgba(0,0,0,0);
+}
+.searchbutton {
+    -fx-background-color: rgba(216,93,54,0.7);
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+    -fx-border-radius: 20px;
+}

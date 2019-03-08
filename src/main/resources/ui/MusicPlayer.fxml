@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="701.0" style="-fx-background-color: #282828;" stylesheets="@MusicPlayer.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Group fx:id="playButton" layoutX="-135.0" layoutY="-14.0">
+         <children>
+            <Circle fill="#fbfbfb" layoutX="500.0" layoutY="63.0" radius="28.0" stroke="#545454" strokeWidth="3.0" styleClass="play-button" />
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="486.0" layoutY="48.0">
+               <image>
+                  <Image url="@../img/icons8-play-90.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="previousButton" layoutX="-112.0" layoutY="-15.0">
+         <children>
+            <Circle fill="#fbfbfb" layoutX="411.0" layoutY="65.0" radius="20.0" stroke="#545454" strokeWidth="2.0" styleClass="play-button" />
+            <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="398.0" layoutY="53.0" style="-fx-rotate: 180;">
+               <image>
+                  <Image url="@../img/icons8-fast-forward-90.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="nextButton" layoutX="18.0" layoutY="-15.0" rotate="180.0">
+         <children>
+            <Circle fill="#fbfbfb" layoutX="411.0" layoutY="65.0" radius="20.0" stroke="#545454" strokeWidth="2.0" styleClass="play-button" />
+            <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="398.0" layoutY="53.0" style="-fx-rotate: 180;">
+               <image>
+                  <Image url="@../img/icons8-fast-forward-90.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <HBox alignment="CENTER" layoutX="519.0" layoutY="16.0" prefHeight="56.0" prefWidth="226.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="35.0" opacity="0.93">
+               <image>
+                  <Image url="@../img/icons8-low-volume-90%20(1).png" />
+               </image>
+            </ImageView>
+            <Slider fx:id="slider" opacity="0.9" />
+            <ImageView fitHeight="35.0" fitWidth="35.0" opacity="0.93">
+               <image>
+                  <Image url="@../img/icons8-audio-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <VBox prefHeight="88.0" prefWidth="226.0" spacing="10.0">
+         <children>
+            <Label fx:id="songLabel" prefWidth="205.0" text="-" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox spacing="5.0">
+               <children>
+                  <Label fx:id="byLabel" prefWidth="21.0" text="by" textFill="WHITE" />
+                  <Label fx:id="artistLabel" prefWidth="205.0" text="-" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox spacing="5.0">
+               <children>
+                  <Label fx:id="onLabel" prefWidth="21.0" text="on" textFill="WHITE" />
+                  <Label fx:id="albumLabel" prefWidth="205.0" text="-" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

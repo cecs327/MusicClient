@@ -1,0 +1,60 @@
+[
+  {
+    "method": "getSongChunk",
+    "dispatcher": "SongDispatcher",
+    "callSemantic": "MAYBE",
+    "params": {
+      "song": "",
+      "fragment": ""
+    }
+  },
+  {
+    "method": "getFileSize",
+    "dispatcher": "SongDispatcher",
+    "callSemantic": "AT_LEAST_ONCE",
+    "params": {
+      "key": ""
+    }
+  },
+  {
+    "method": "login",
+    "dispatcher": "LoginDispatcher",
+    "callSemantic": "AT_LEAST_ONCE",
+    "params": {
+      "username": "",
+      "password": ""
+    }
+  },
+  {
+    "method": "getPlaylistsChunk",
+    "dispatcher": "PlaylistDispatcher",
+    "callSemantic": "AT_LEAST_ONCE",
+    "params": {
+      "fragment": ""
+    }
+  },
+  {
+    "method": "getPlaylistsSize",
+    "dispatcher": "PlaylistDispatcher",
+    "callSemantic": "AT_LEAST_ONCE",
+    "params": {
+      "userToken": ""
+    }
+  },
+  {
+    "method": "getSearchResultChunk",
+    "dispatcher": "SearchResultDispatcher",
+    "callSemantic": "MAYBE",
+    "params": {
+      "fragment": ""
+    }
+  },
+  {
+    "method": "getSize",
+    "dispatcher": "SearchResultDispatcher",
+    "callSemantic": "AT_LEAST_ONCE",
+    "params": {
+      "query": ""
+    }
+  }
+]

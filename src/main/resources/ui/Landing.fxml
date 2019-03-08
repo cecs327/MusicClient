@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" stylesheets="@Landing.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" layoutX="144.0" layoutY="-34.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1024.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.3" prefHeight="576.0" prefWidth="512.0" />
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="512.0" styleClass="opacity">
+               <children>
+                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="512.0">
+                     <children>
+                        <BorderPane minHeight="-Infinity" prefHeight="144.0" prefWidth="600.0">
+                           <top>
+                              <FlowPane alignment="CENTER" prefHeight="136.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="75.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                                       <image>
+                                          <Image url="@/img/background-img-alt.jpeg" />
+                                       </image>
+                                    </ImageView>
+                                    <TextFlow prefHeight="48.0" prefWidth="300.0" textAlignment="CENTER">
+                                       <children>
+                                          <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-center" text="MusicStreamer" textAlignment="CENTER" wrappingWidth="166.66668701171875">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </FlowPane>
+                           </top>
+                        </BorderPane>
+                        <BorderPane prefHeight="662.0" prefWidth="288.0">
+                           <top>
+                              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <TextFlow textAlignment="CENTER">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Music streaming made easy." textAlignment="CENTER">
+                                             <font>
+                                                <Font size="19.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                    <TextFlow textAlignment="CENTER">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Listen to thousands of songs for free, no credit card required.">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </TextFlow>
+                                 </children>
+                              </VBox>
+                           </top>
+                           <center>
+                              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="512.0" styleClass="login-form" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <TextField fx:id="usernameField" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="0.0" promptText="Username" styleClass="input-stuff">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="passwordField" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="0.0" promptText="Password" styleClass="input-stuff">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" styleClass="primary-button" text="Login" textFill="WHITE">
+                                       <font>
+                                          <Font name="Lucida Sans Regular" size="26.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" top="50.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button fx:id="registerButton" alignment="CENTER" mnemonicParsing="false" styleClass="alt-button" text="Register">
+                                       <font>
+                                          <Font name="Lucida Sans Regular" size="26.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

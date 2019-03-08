@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.embed.swing.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="125.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Gui.MusicPlayer.MusicPlayerPresenter">
+   <children>
+      <ToggleButton fx:id="playButton" layoutX="450.0" layoutY="48.0" mnemonicParsing="false" text="Play" textAlignment="CENTER" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="50.0" />
+      <Slider fx:id="slider" layoutX="732.0" layoutY="55.0" />
+   </children>
+</AnchorPane>
