@@ -1,6 +1,6 @@
 package Gui.Landing;
 
-import app.Main;
+import app.App;
 import com.google.gson.stream.JsonReader;
 import data.UserSession;
 import model.User;
@@ -32,13 +32,13 @@ public class LandingService {
 
         reader.beginObject();
         reader.nextName();
-        Main.userToken = reader.nextInt();
+        App.userToken = reader.nextInt();
         reader.endObject();
 
         // TODO: Add this info to loginDispatcher
-        currentSession = new User("default", "default", "default");
+        currentSession = new User(username, "default", password);
         UserSession.setCurrentSession(currentSession);
-        return Main.userToken != 0;
+        return App.userToken != -1;
     }
 
     protected User getCurrentSession() {

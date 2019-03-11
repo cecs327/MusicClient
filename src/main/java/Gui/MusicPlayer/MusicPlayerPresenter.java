@@ -2,7 +2,7 @@ package Gui.MusicPlayer;
 
 import Gui.Homepage.HomepagePresenter;
 import Gui.MainDisplay.MainDisplayPresenter;
-import app.Main;
+import app.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -64,8 +64,8 @@ public class MusicPlayerPresenter {
         try {
             isPlaying = false;
 
-            playButton.setOnMouseEntered(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.HAND));
-            playButton.setOnMouseExited(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
+            playButton.setOnMouseEntered(e -> App.getPrimaryStage().getScene().setCursor(Cursor.HAND));
+            playButton.setOnMouseExited(e -> App.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
             playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 try {
                     togglePlay();
@@ -74,8 +74,8 @@ public class MusicPlayerPresenter {
                 }
             });
 
-            nextButton.setOnMouseEntered(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.HAND));
-            nextButton.setOnMouseExited(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
+            nextButton.setOnMouseEntered(e -> App.getPrimaryStage().getScene().setCursor(Cursor.HAND));
+            nextButton.setOnMouseExited(e -> App.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
             nextButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                 try {
                     if (isPlaying) togglePlay();
@@ -98,8 +98,8 @@ public class MusicPlayerPresenter {
 
             });
 
-            previousButton.setOnMouseEntered(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.HAND));
-            previousButton.setOnMouseExited(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
+            previousButton.setOnMouseEntered(e -> App.getPrimaryStage().getScene().setCursor(Cursor.HAND));
+            previousButton.setOnMouseExited(e -> App.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
             previousButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                 try {
                     if (isPlaying) togglePlay();
@@ -124,8 +124,8 @@ public class MusicPlayerPresenter {
             });
 
             slider.setValue(50);
-            slider.setOnMouseEntered(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.HAND));
-            slider.setOnMouseExited(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
+            slider.setOnMouseEntered(e -> App.getPrimaryStage().getScene().setCursor(Cursor.HAND));
+            slider.setOnMouseExited(e -> App.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -183,8 +183,6 @@ public class MusicPlayerPresenter {
             myPlayer.open(new BufferedInputStream(new CECS327InputStream(Long.valueOf(songFile), proxy)));
         } catch (BasicPlayerException e) {
             e.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
         }
     }
 
@@ -194,7 +192,7 @@ public class MusicPlayerPresenter {
 
     // play song
     public void receivePlaylistItemPlayRequest(HomepagePresenter sender, CollectionLightWeight song, Playlist playlist) {
-        this.playlist = playlist.getSongList();
+        //this.playlist = playlist.getSongList();
         this.currentSong = song;
 
         songLabel.setText(song.getSongTitle());

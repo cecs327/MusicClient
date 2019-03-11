@@ -3,7 +3,7 @@ package Gui.PlaylistList;
 import Gui.Homepage.HomepagePresenter;
 import Gui.MainDisplay.MainDisplayPresenter;
 import Gui.PlaylistItem.PlaylistItem;
-import app.Main;
+import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -34,7 +34,7 @@ public class PlaylistListPresenter {
             this.homepagePresenter = homepagePresenter;
 
             playlistListModel = new PlaylistListModel();
-            playlistListModel.setPlaylists(new CECS327InputStream(Main.userToken, homepagePresenter.getProxy()));
+            playlistListModel.setPlaylists(new CECS327InputStream(App.userToken, homepagePresenter.getProxy()));
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/PlaylistListAlt.fxml"));
             loader.setController(this);
             view = loader.load();
@@ -51,8 +51,8 @@ public class PlaylistListPresenter {
 
     @FXML
     public void initialize() {
-        addButton.setOnMouseEntered(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.HAND));
-        addButton.setOnMouseExited(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
+        addButton.setOnMouseEntered(e -> App.getPrimaryStage().getScene().setCursor(Cursor.HAND));
+        addButton.setOnMouseExited(e -> App.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT));
         addButton.setOnMouseClicked(e -> showCreatePlaylistWindow());
         renderPlaylists();
     }

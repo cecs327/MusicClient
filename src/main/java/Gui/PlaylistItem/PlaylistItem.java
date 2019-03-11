@@ -2,7 +2,7 @@ package Gui.PlaylistItem;
 
 import Gui.PlaylistList.DeletePlaylistWindow;
 import Gui.PlaylistList.PlaylistListPresenter;
-import app.Main;
+import app.App;
 import data.CollectionFormat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,12 +61,12 @@ public class PlaylistItem {
         deletePane.setPickOnBounds(true);
         deletePane.relocate(140, 30);
         deletePane.setOnMouseEntered(f -> {
-            Main.getPrimaryStage()
+            App.getPrimaryStage()
                     .getScene()
                     .setCursor(Cursor.HAND);
         });
         deletePane.setOnMouseExited(f -> {
-            Main.getPrimaryStage()
+            App.getPrimaryStage()
                     .getScene()
                     .setCursor(Cursor.DEFAULT);
         });
@@ -91,7 +91,7 @@ public class PlaylistItem {
                 dragCompleted = true;
                 sendDragComplete();
             }
-            Main.setCursorStyle(Cursor.DEFAULT);
+            App.setCursorStyle(Cursor.DEFAULT);
             e.setDropCompleted(dragCompleted);
             e.consume();
         });

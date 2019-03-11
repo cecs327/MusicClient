@@ -17,7 +17,7 @@ import rpc.ProxyInterface;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class App extends Application {
     private static Stage primaryStage;
     private static Scene primaryScene;
     private AnchorPane rootLayout;
@@ -79,7 +79,7 @@ public class Main extends Application {
        try {
            // Load root layout from FXML file.
            FXMLLoader loader = new FXMLLoader();
-//           loader.setLocation(Main.class.getResource("gui/Landing/Landing.fxml"));
+//           loader.setLocation(App.class.getResource("gui/Landing/Landing.fxml"));
            rootLayout = (AnchorPane) loader.load();
 
            // Show the scene containing the root layout.

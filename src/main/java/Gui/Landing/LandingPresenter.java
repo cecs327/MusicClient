@@ -1,7 +1,7 @@
 package Gui.Landing;
 
 import Gui.Homepage.HomepagePresenter;
-import app.Main;
+import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -118,6 +118,6 @@ public class LandingPresenter {
     }
 
     public void showLandingPage() {
-        Main.getPrimaryStage().setScene(new Scene(view));
+        App.getPrimaryStage().setScene(new Scene(view));
     }
 }

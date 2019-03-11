@@ -4,7 +4,7 @@ import Gui.MainDisplay.MainDisplayPresenter;
 import Gui.MusicPlayer.MusicPlayerPresenter;
 import Gui.PlaylistList.PlaylistListPresenter;
 import Gui.SearchBar.SearchBarPresenter;
-import app.Main;
+import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -66,7 +66,7 @@ public class HomepagePresenter {
 
     public void showDefaultPage() {
         Scene scene = new Scene(view);
-        Main.getPrimaryStage().setScene(scene);
+        App.getPrimaryStage().setScene(scene);
     }
 
     public void receivePlaylistItemClick(MainDisplayPresenter sender, CollectionLightWeight song, Playlist playlist) {

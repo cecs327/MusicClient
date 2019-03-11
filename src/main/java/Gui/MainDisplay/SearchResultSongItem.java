@@ -1,6 +1,6 @@
 package Gui.MainDisplay;
 
-import app.Main;
+import app.App;
 import data.CollectionFormat;
 import javafx.scene.Cursor;
 import javafx.scene.SnapshotParameters;
@@ -19,7 +19,7 @@ public class SearchResultSongItem extends MainDisplayItem {
         AnchorPane p = super.songPane;
 
         super.songPane.setOnDragDetected(e -> {
-            Main.setCursorStyle(Cursor.CLOSED_HAND);
+            App.setCursorStyle(Cursor.CLOSED_HAND);
 
             Dragboard dragboard = p.startDragAndDrop(TransferMode.COPY);
             ClipboardContent content = new ClipboardContent();

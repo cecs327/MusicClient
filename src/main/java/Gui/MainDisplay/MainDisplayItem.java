@@ -1,6 +1,6 @@
 package Gui.MainDisplay;
 
-import app.Main;
+import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -45,14 +45,14 @@ public class MainDisplayItem {
         albumNameLabel.setText(song.getReleaseName());
 
         songPane.setOnMouseEntered(e -> {
-            Main.getPrimaryStage()
+            App.getPrimaryStage()
                     .getScene()
                     .setCursor(Cursor.HAND);
             songPane.setStyle("-fx-background-color: #464646");
         });
 
         songPane.setOnMouseExited(e -> {
-            Main.getPrimaryStage()
+            App.getPrimaryStage()
                     .getScene()
                     .setCursor(Cursor.DEFAULT);
             songPane.setStyle("-fx-background-color: #333333");
