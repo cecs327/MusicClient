@@ -9,14 +9,19 @@ package rpc; /**
 
 
 import com.google.gson.JsonObject;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Semaphore;
 
 
 public class CECS327InputStream extends InputStream {
+    private final static Logger LOGGER = Logger.getLogger(CECS327InputStream.class);
+    private Map<String, String> params;
     /**
      * Total number of bytes in the file
      */
@@ -62,42 +67,47 @@ public class CECS327InputStream extends InputStream {
      *
      * @param fileName The name of the file
      */
-    public CECS327InputStream(Long fileName, ProxyInterface proxy) throws IOException {
+    // TODO: De-hardcode addition of parameters by name --> i.e. move to client near-gui code (i.e. attach to the
+    // forms themselves or something.
+    public CECS327InputStream(Long fileName, ProxyInterface proxy) {
         sem = new Semaphore(1);
         try {
             sem.acquire();
-        } catch (InterruptedException exc) {
-            System.out.println(exc);
+        } catch (InterruptedException e) {
+            LOGGER.error("ERROR: CECS327InputStream constructor: " + e);
         }
         streamType = "song";
         this.proxy = proxy;
         this.fileName = fileName;
         this.buf = new byte[FRAGMENT_SIZE];
         this.nextBuf = new byte[FRAGMENT_SIZE];
-        String[] param = new String[1];
-        param[0] = String.valueOf(this.fileName);
-        JsonObject jsonRet = proxy.synchExecution("getFileSize", param);
+
+        params = new HashMap<>();
+        params.put("key", this.fileName.toString());
+
+        JsonObject jsonRet = proxy.syncExecution("getFileSize", params);
         this.total = Integer.parseInt(jsonRet.get("ret").getAsString());
         getBuff(fragment);
         fragment++;
-        System.out.println("CECS327InputStream constructed");//remove
     }
 
     // For Search Result
-    public CECS327InputStream(String query, ProxyInterface proxy) throws IOException {
+    public CECS327InputStream(String query, ProxyInterface proxy) {
         sem = new Semaphore(1);
         try {
             sem.acquire();
-        } catch (InterruptedException exc) {
-            System.out.println(exc.getMessage());
+        } catch (InterruptedException e) {
+            LOGGER.error("ERROR: CECS327InputStream constructor: " + e);
         }
         streamType = "search";
         this.proxy = proxy;
         this.buf = new byte[FRAGMENT_SIZE];
         this.nextBuf = new byte[FRAGMENT_SIZE];
-        String[] param = new String[1];
-        param[0] = query;
-        JsonObject jsonRet = proxy.synchExecution("getSize", param);
+
+        params = new HashMap<>();
+        params.put("query", query);
+
+        JsonObject jsonRet = proxy.syncExecution("getSize", params);
         this.total = Integer.parseInt(jsonRet.get("ret").getAsString());
         getBuff(fragment);
         fragment++;
@@ -108,8 +118,8 @@ public class CECS327InputStream extends InputStream {
         sem = new Semaphore(1);
         try {
             sem.acquire();
-        } catch (InterruptedException exc) {
-            System.out.println(exc.getMessage());
+        } catch (InterruptedException e) {
+            LOGGER.error("ERROR: CECS327InputStream constructor: " + e);
         }
         streamType = "login";
         this.proxy = proxy;
@@ -118,7 +128,13 @@ public class CECS327InputStream extends InputStream {
         String[] param = new String[2];
         param[0] = username;
         param[1] = password;
-        JsonObject jsonRet = proxy.synchExecution("login", param);
+
+        params = new HashMap<>();
+        params.put("username", username);
+        params.put("password", password);
+
+        JsonObject jsonRet = proxy.syncExecution("login", params);
+        System.out.println(jsonRet);
         this.total = FRAGMENT_SIZE;
         String s = jsonRet.get("ret").getAsString();
         nextBuf = Base64.getDecoder().decode(s);
@@ -131,8 +147,8 @@ public class CECS327InputStream extends InputStream {
         sem = new Semaphore(1);
         try {
             sem.acquire();
-        } catch (InterruptedException exc) {
-            System.out.println(exc);
+        } catch (InterruptedException e) {
+            LOGGER.error("ERROR: CECS327InputStream constructor: " + e);
         }
         streamType = "retrievePlaylists";
         this.proxy = proxy;
@@ -140,7 +156,11 @@ public class CECS327InputStream extends InputStream {
         this.nextBuf = new byte[FRAGMENT_SIZE];
         String[] param = new String[1];
         param[0] = Integer.toString(userToken);
-        JsonObject jsonRet = proxy.synchExecution("getPlaylistsSize", param);
+
+        params = new HashMap<>();
+        params.put("userToken", Long.toString(userToken));
+
+        JsonObject jsonRet = proxy.syncExecution("getPlaylistsSize", params);
         this.total = Integer.parseInt(jsonRet.get("ret").getAsString());
         getBuff(fragment);
         fragment++;
@@ -150,7 +170,9 @@ public class CECS327InputStream extends InputStream {
      * getNextBuff reads the buffer. It gets the data using
      * the remote method getSongChunk
      */
-    protected void getBuff(int fragment) throws IOException {
+    protected void getBuff(int fragment) {
+        params = new HashMap<>();
+
         if (streamType.equals("song")) {
             new Thread() {
                 public void run() {
@@ -158,7 +180,10 @@ public class CECS327InputStream extends InputStream {
                     param[0] = String.valueOf(fileName);
                     param[1] = String.valueOf(fragment);
 
-                    JsonObject jsonRet = proxy.synchExecution("getSongChunk", param);
+                    params.put("song", String.valueOf(fileName));
+                    params.put("fragment", String.valueOf(fragment));
+
+                    JsonObject jsonRet = proxy.syncExecution("getSongChunk", params);
                     String s = jsonRet.get("ret").getAsString();
                     nextBuf = Base64.getDecoder().decode(s);
                     sem.release();
@@ -171,7 +196,9 @@ public class CECS327InputStream extends InputStream {
                     String[] param = new String[1];
                     param[0] = String.valueOf(fragment);
 
-                    JsonObject jsonRet = proxy.synchExecution("getSearchResultChunk", param);
+                    params.put("fragment", String.valueOf(fragment));
+
+                    JsonObject jsonRet = proxy.syncExecution("getSearchResultChunk", params);
                     String s = jsonRet.get("ret").getAsString();
                     nextBuf = Base64.getDecoder().decode(s);
                     sem.release();
@@ -181,10 +208,9 @@ public class CECS327InputStream extends InputStream {
         } else if (streamType.equals("retrievePlaylists")) {
             new Thread() {
                 public void run() {
-                    String[] param = new String[1];
-                    param[0] = String.valueOf(fragment);
+                    params.put("fragment", String.valueOf(fragment));
 
-                    JsonObject jsonRet = proxy.synchExecution("getPlaylistsChunk", param);
+                    JsonObject jsonRet = proxy.syncExecution("getPlaylistsChunk", params);
                     String s = jsonRet.get("ret").getAsString();
                     nextBuf = Base64.getDecoder().decode(s);
                     sem.release();
