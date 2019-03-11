@@ -6,16 +6,27 @@ package rpc; /**
  * @since 2019-01-24
  */
 
+import com.fasterxml.uuid.Generators;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.net.URL;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 
 public class Proxy implements ProxyInterface {
-    clientCommunicationProtocol communicate = null;
+    private static final Logger LOGGER = Logger.getLogger(Proxy.class);
+    private ClientCommunicationProtocol communicate;
+    private static final URL MUSIC_URL = Proxy.class.getResource("/appdata/methods.json");
 
     // Constructor
     public Proxy(int portNumber) {
-        this.communicate = new clientCommunicationProtocol();
+        this.communicate = new ClientCommunicationProtocol();
         communicate.connect(portNumber);
     }
 
@@ -23,69 +34,62 @@ public class Proxy implements ProxyInterface {
      * Executes the  remote method "remoteMethod". The method blocks until
      * it receives the reply of the message.
      */
-    public synchronized JsonObject synchExecution(String remoteMethod, String[] param) {
-        JsonObject jsonRequest = new JsonObject();
-        JsonObject jsonParam = new JsonObject();
+    public synchronized JsonObject syncExecution(String remoteMethod, Map<String, String> params) {
+        JsonObject remoteMethodJO = getRemoteMethodFromJson(remoteMethod);
 
-        jsonRequest.addProperty("remoteMethod", remoteMethod);
+        attachParams(remoteMethodJO, params);
 
+        attachUUID(remoteMethodJO);
+        String callSemantic = getCallSemanticFromJson(remoteMethodJO);
 
-        if (remoteMethod.equals("getSongChunk") || remoteMethod.equals("getFileSize")) {
-            jsonRequest.addProperty("objectName", "SongServices");
-            // It is hardcoded. Instead it should be dynamic using  RemoteRef
-            if (remoteMethod.equals("getSongChunk")) {
-
-                jsonParam.addProperty("song", param[0]);
-                jsonParam.addProperty("fragment", param[1]);
-
-            }
-            if (remoteMethod.equals("getFileSize")) {
-                jsonParam.addProperty("song", param[0]);
-            }
-        }
-
-        // Search result dispatcher
-        else if (remoteMethod.equals("getSize") || remoteMethod.equals("getSearchResultChunk")) {
-            jsonRequest.addProperty("objectName", "SearchResultServices");
-            if (remoteMethod.equals("getSearchResultChunk")) {
-                jsonParam.addProperty("fragment", param[0]);
-            }
-            if (remoteMethod.equals("getSize")) {
-                jsonParam.addProperty("query", param[0]);
-            }
-        }
-
-        // Login Dispatcher
-        else if (remoteMethod.equals("login")) {
-            jsonRequest.addProperty("objectName", "LoginServices");
-            jsonParam.addProperty("username", param[0]);
-            jsonParam.addProperty("password", param[1]);
-        }
-
-        // Playlists Dispatcher
-        else if (remoteMethod.equals("getPlaylistsChunk") || remoteMethod.equals("getPlaylistsSize")) {
-            jsonRequest.addProperty("objectName", "PlaylistServices");
-            if (remoteMethod.equals("getPlaylistsChunk")) {
-                jsonParam.addProperty("fragment", param[0]);
-            }
-            if (remoteMethod.equals("getPlaylistsSize")) {
-                jsonParam.addProperty("userToken", param[0]);
-            }
-        }
-
-        jsonRequest.add("param", jsonParam);
-
-        JsonParser parser = new JsonParser();
-        System.out.println("Sending request: " + jsonRequest.toString());
-        String strRet = communicate.sendRequest(jsonRequest.toString().trim());
+        System.out.println("Sending request: " + remoteMethodJO.toString());
+        String strRet = communicate.sendRequest(remoteMethodJO.toString().trim(), callSemantic);
         System.out.println("Returning response from server to inputstream: " + strRet);
         String myReturn = strRet.trim();
+
+        JsonParser parser = new JsonParser();
+
         return parser.parse(myReturn).getAsJsonObject();
+    }
+
+    public JsonObject getRemoteMethodFromJson(String remoteMethod) {
+        Gson gson = new Gson();
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(MUSIC_URL.openStream()));
+            JsonObject jsonObject = gson.fromJson(br, JsonObject.class).getAsJsonObject();
+
+            return jsonObject.get(remoteMethod).getAsJsonObject();
+        } catch (IOException e) {
+            LOGGER.error("ERROR: Proxy.getRemoteMethod: " + e);
+            return null;
+        }
+    }
+
+    private void attachParams(JsonObject methodObject, Map<String, String> params) {
+        JsonObject paramsObject = methodObject.get("params").getAsJsonObject();
+
+        Set<Map.Entry<String, String>> entrySet = params.entrySet();
+
+        for(Map.Entry<String, String> entry : entrySet) {
+            paramsObject.addProperty(entry.getKey(), entry.getValue());
+        }
+
+        methodObject.add("params", paramsObject);
+    }
+
+    private void attachUUID(JsonObject methodObject) {
+        UUID uuid = Generators.timeBasedGenerator().generate();
+        methodObject.addProperty("requestId", uuid.toString());
+    }
+
+    private String getCallSemanticFromJson(JsonObject methodObject) {
+        return methodObject.get("callSemantic").getAsString();
     }
 
     /*
      * Executes the  remote method remoteMethod and returns without waiting
-     * for the reply. It does similar to synchExecution but does not
+     * for the reply. It does similar to syncExecution but does not
      * return any value
      *
      */
