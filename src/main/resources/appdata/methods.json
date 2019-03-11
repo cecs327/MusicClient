@@ -1,5 +1,5 @@
-[
-  {
+{
+  "getSongChunk": {
     "method": "getSongChunk",
     "dispatcher": "SongDispatcher",
     "callSemantic": "MAYBE",
@@ -8,7 +8,7 @@
       "fragment": ""
     }
   },
-  {
+  "getFileSize": {
     "method": "getFileSize",
     "dispatcher": "SongDispatcher",
     "callSemantic": "AT_LEAST_ONCE",
@@ -16,7 +16,7 @@
       "key": ""
     }
   },
-  {
+  "login": {
     "method": "login",
     "dispatcher": "LoginDispatcher",
     "callSemantic": "AT_LEAST_ONCE",
@@ -25,7 +25,7 @@
       "password": ""
     }
   },
-  {
+  "getPlaylistsChunk": {
     "method": "getPlaylistsChunk",
     "dispatcher": "PlaylistDispatcher",
     "callSemantic": "AT_LEAST_ONCE",
@@ -33,7 +33,7 @@
       "fragment": ""
     }
   },
-  {
+  "getPlaylistsSize": {
     "method": "getPlaylistsSize",
     "dispatcher": "PlaylistDispatcher",
     "callSemantic": "AT_LEAST_ONCE",
@@ -41,7 +41,7 @@
       "userToken": ""
     }
   },
-  {
+  "getSearchResultChunk": {
     "method": "getSearchResultChunk",
     "dispatcher": "SearchResultDispatcher",
     "callSemantic": "MAYBE",
@@ -49,7 +49,7 @@
       "fragment": ""
     }
   },
-  {
+  "getSize": {
     "method": "getSize",
     "dispatcher": "SearchResultDispatcher",
     "callSemantic": "AT_LEAST_ONCE",
@@ -57,4 +57,4 @@
       "query": ""
     }
   }
-]
+}
