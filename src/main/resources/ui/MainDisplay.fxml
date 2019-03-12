@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fx:id="displayScroller" hbarPolicy="NEVER" prefHeight="398.0" prefWidth="384.0" style="-fx-background-color: #333; -fx-border-color: #333;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox fx:id="displayVBox" prefHeight="394.0" prefWidth="388.0" style="-fx-background-color: #595959; -fx-border-color: #595959;" />
+   </content>
+</ScrollPane>

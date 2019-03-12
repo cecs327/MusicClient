@@ -1,0 +1,43 @@
+* {
+    -fx-padding: 0;
+    -fx-margin: 0;
+}
+.background {
+    -fx-background-color: white;
+    -fx-background-image: url('static/background-img-alt.jpeg');
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-display: flex;
+}
+
+.opacity {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.5), 50, 0, -10, 0);
+}
+
+.logo {
+    -fx-padding: 50px;
+    -fx-background-color: pink;
+}
+
+.text-center {
+    -fx-text-alignment: center;
+    -fx-alignment: middle;
+}
+
+.login-form {
+    -fx-padding: 50px;
+}
+
+.input-stuff {
+    -fx-pref-width: 350px;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: white;
+    -fx-background-color: transparent;
+    -fx-padding: 1px 0px;
+    -fx-border-insets: 21px 0px;
+}
+
+.login-button {
+    -fx-pref-width: 175px;
+}

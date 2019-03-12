@@ -1,0 +1,9 @@
+.v-box {
+    -fx-background-color: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0, 0.9));
+    -fx-border-width: 0;
+    -fx-border-color: black;
+}
+
+.create-button {
+    -fx-background-color: #eee;
+}

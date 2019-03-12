@@ -1,0 +1,56 @@
+{
+  "userList": [
+    {
+      "username": "user",
+      "password": "pass",
+      "email": "example@email.com",
+      "playlists": [
+        {
+          "first": [
+            287650,
+            300822,
+            300848,
+            41838,
+            514953,
+            611336
+          ]
+        },
+        {
+          "second": [
+            300848,
+            41838,
+            514953,
+            611336
+          ]
+        }
+      ]
+    },
+    {
+      "username": "mark",
+      "password": "manson",
+      "email": "mark@email.com",
+      "playlists": [
+        {
+          "hits": [
+            300848,
+            555
+          ]
+        },
+        {
+          "New Songs": [
+            555
+          ]
+        },
+        {
+          "jams": [
+            300848,
+            41838,
+            300822,
+            300848,
+            41838
+          ]
+        }
+      ]
+    }
+  ]
+}
