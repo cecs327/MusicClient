@@ -17,6 +17,10 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class Proxy implements ProxyInterface {
@@ -50,6 +54,15 @@ public class Proxy implements ProxyInterface {
         JsonParser parser = new JsonParser();
 
         return parser.parse(myReturn).getAsJsonObject();
+    }
+
+    public synchronized void asyncExecution(String remoteMethod, Map<String, String> params) {
+        JsonObject remoteMethodJO = getRemoteMethodFromJson(remoteMethod);
+
+        attachParams(remoteMethodJO, params);
+        attachUUID(remoteMethodJO);
+
+        communicate.sendAsyncRequest(remoteMethodJO.toString().trim());
     }
 
     public JsonObject getRemoteMethodFromJson(String remoteMethod) {

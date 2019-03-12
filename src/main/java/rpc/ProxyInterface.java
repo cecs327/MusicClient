@@ -44,7 +44,7 @@ public interface ProxyInterface {
      * return any value
      *
      */
-    void asynchExecution(String remoteMethod, String[] param);
+    void asyncExecution(String remoteMethod, Map<String, String> params);
 }
 
 

@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import model.Playlist;
 import rpc.CECS327InputStream;
+import rpc.ProxyInterface;
 
 import java.io.IOException;
 
@@ -114,5 +115,9 @@ public class PlaylistListPresenter {
     private void showCreatePlaylistWindow() {
         CreatePlaylistWindow cpw = new CreatePlaylistWindow(this);
         cpw.show();
+    }
+
+    public ProxyInterface getProxy() {
+        return homepagePresenter.getProxy();
     }
 }

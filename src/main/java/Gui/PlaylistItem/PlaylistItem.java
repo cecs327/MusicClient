@@ -18,6 +18,8 @@ import model.CollectionLightWeight;
 import model.Playlist;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlaylistItem {
 
@@ -88,6 +90,13 @@ public class PlaylistItem {
             if (dragboard.hasContent(CollectionFormat.FORMAT)) {
                 CollectionLightWeight song = (CollectionLightWeight) dragboard.getContent(CollectionFormat.FORMAT);
                 playlist.addToPlaylist(song);
+
+                Map<String, String> params = new HashMap<>();
+                params.put("userToken", Integer.toString(App.userToken));
+                params.put("playlistName", playlist.getName());
+                params.put("song", Long.toString(song.getId()));
+                parent.getProxy().asyncExecution("addSongToPlaylist", params);
+
                 dragCompleted = true;
                 sendDragComplete();
             }

@@ -49,6 +49,38 @@ class ClientCommunicationProtocol {
         return response;                                                                                                // Return request response
     }
 
+    public void sendAsyncRequest(String request) {
+        String response = "";
+        try {
+
+            byte[] requestPayload = new byte[FRAGMENT_SIZE];                                                            // Initialize payload
+            requestPayload = request.getBytes();                                                                        // Fill payload
+            DatagramPacket requestPacket = new DatagramPacket(requestPayload, requestPayload.length, this.ip, this.portNumber);     // Initialize request packet
+            System.out.println("Client sending request packet.");
+            socket.send(requestPacket);                                                                               // Send request packet
+            System.out.print("Client request packet sent.");
+
+            new Thread (){
+                public void run() {
+                    byte[] responseData = new byte[FRAGMENT_SIZE];                                                              // Prepare response packet
+                    DatagramPacket responsePacket = new DatagramPacket(responseData, responseData.length);                      // Initialize reponse packet
+                    System.out.println("Client attempting to receive response packet.");
+                    try {
+                        socket.receive(responsePacket);                                                                           // Retrieve reponse packet
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Client has received response packet from server.");
+                    String response = new String(responsePacket.getData());                                                           // Get reponse packet's payload
+                    System.out.println(response);
+                }
+            }.start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String sendAndReceiveRequest(DatagramPacket requestPacket, int timeout, int numRetries) {
         for ( ; numRetries >= 0; numRetries--) {
             try {
